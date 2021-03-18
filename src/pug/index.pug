@@ -1,53 +1,60 @@
-declare function require(x: string): any;
+//- vars
+block vars
+doctype html
+head
+    meta(name="viewport" content='width=750,user-scalable=yes')
+    meta(name="format-detection", content="telephone=no")
+    meta(name="SKYPE_TOOLBAR", content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+html(lang='ja')
+    head(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# " + pageOgpType + ": http://ogp.me/ns/" + pageOgpType + "#")
+        title うんち！
 
-const buzz = require('buzz');
+        //- CSS Setting
+        link(rel='stylesheet', href="./css/style.css?v=201903-01")
+        block link
 
-class Sound {
-  public voices;
+    body#g(class=bodyClass)
+        script
+            | var isPC = true;
+            | (function () { if (navigator.userAgent.toLowerCase().match(/iphone|ipad|android/)) { document.body.classList.add('sp');isPC=false;return; } document.body.classList .add('pc'); })();
+        //block body
+        .header-nav
+            .button-twitter
+                a.twitter-share-button(href!="https://twitter.com/share?text=%E7%80%AC%E6%88%B8%E7%BE%8E%E5%A4%9C%E5%AD%90%E3%81%95%E3%82%93%E3%81%8C%E5%96%8B%E3%81%A3%E3%81%A6%E3%81%8F%E3%82%8C%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3&url=https%3A%2F%2Fniltea.github.io%2Fsetomiya-button%2F%3Fref%3Dtwbtn", data-show-count="false") Tweet
 
-  constructor() {
-    // init vars
-    // this.isPlay = false;
-    this.voices = {};
-    // this.sndVoice = null;
+        #wrapper
+            main.mainContent
+                h1 せとみや
+                p.desc_top 瀬戸美夜子さんが喋ってくれます。
+                .button_wrapper
+                    // 兄（あさひ氏）が頭良かったので妹も挑戦する【深夜ゲルラ】
+                    .button.button-play(data-voice="3d8hqeWhrHY-2h23m43s") アゴを煽る瀬戸
+                    // 【#3】やさしい世界からの脱出【UNDERTALE】
+                    .button.button-play(data-voice="FoNBa6yvPp0-0h41m33s") がんばるにゃん🐈
+                    // 【Portal】被験体としてテストしていくパズルゲーム【にじさんじ】
+                    .button.button-play(data-voice="WwgEDYvwLiE-0h49m25s") うんち!!
+                    // 【虫注意】ゲリラでちょっと雑談＆バッタ目ミックスを頂いてみた
+                    .button.button-play(data-voice="j35rIIPA7_M-0h24m17s") ハイテンションせとみや
+                    // ホラゲを可愛くビビれず、挙句に早く終わったからマロ処理と雑モノマネ大会【にじさんじ】
+                    .button.button-play(data-voice="REKsjxKgo6Q-0h31m47s") 可愛い声が出ない
+                    // 【ゲーム実況】人種も言語もトマトに統一されてみた【にじさんじ】
+                    .button.button-play(data-voice="imsujd-JHeY-0h26m20s") ｺﾛｯ☆
+                    .button.button-play(data-voice="imsujd-JHeY-0h36m37s") 漏れそう
+                    .button.button-play(data-voice="imsujd-JHeY-0h41m34s") この世の終わりみたいな脅迫
+                    .button.button-play(data-voice="imsujd-JHeY-0h52m09s") う゛ん゛ぢぃ゛ぃ゛！゛
+            .mainFooter
+                .credit
+                    p 音声の著作権は、全て『<a rel="noopener" href="https://www.youtube.com/channel/UCHK5wkevfaGrPr7j3g56Jmw" target="_blank">にじさんじ公式バーチャルライバー 瀬戸 美夜子</a>』に帰属します。
+                    p 音声以外の部分については、<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank">CC-BY-NC-SA-4.0</a>に基づき自由にご利用ください。<br>ソースコードは<a href="https://github.com/niltea/setomiya-button" target="_blank">こちら</a>。<br>お問い合わせ・追加したら面白そうなボイスがあれば
+                        a(href="https://twitter.com/niltea_vt", target="_blank") @niltea_vt
+                        |まで。
 
-    // 音声周り
-    // const isBuzzSupported = buzz.isSupported();
-    // if (!isBuzzSupported) {
-    //   throw 'buzz is not supported';
-    // }
-
-    const playButtons = Array.from(document.getElementsByClassName('button-play'));
-    playButtons.forEach((button) => {
-      if (button.classList.contains('disabled')) {
-        return;
-      }
-
-      // buzzプラグインが使える場合
-      const voiceID: string = button.getAttribute('data-voice');
-      const voicePath: string = `./voice/${voiceID}`;
-
-      // eslint-disable-next-line new-cap
-      this.voices[voiceID] = new buzz.sound(voicePath, {
-        formats: ['mp3'],
-        preload: true,
-      });
-      button.addEventListener('click', (e) => {
-        this.playAudio(voiceID);
-      });
-    });
-    // buzzプラグインが使えない場合は終了
-    // if (!isBuzzSupported) return;
-  }
-
-  playAudio(buttonID) {
-    // 再生中の音を止める
-    buzz.all().stop();
-    this.voices[buttonID].play();
-  }
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  new Sound();
-});
+    //- script(src='/js/libs.js')
+    script(src='./js/app.js')
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115478883-3"></script>
+    script
+        |window.dataLayer = window.dataLayer || [];
+        |function gtag(){dataLayer.push(arguments);}
+        |gtag('js', new Date());
+        |gtag('config', 'UA-115478883-3');
+    script(async, src="https://platform.twitter.com/widgets.js", charset="utf-8")
